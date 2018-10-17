@@ -3,18 +3,18 @@
     <string name="cases">الحالات</string>
     <string name="Events">تضاهرات</string>
     <string name="Contacts">الاتصال</string>
-    <string name="about">About</string>
-    <string name="hint_email">Email</string>
-    <string name="hint_password">Password</string>
-    <string name="hint_name">Fullname</string>
-    <string name="btn_login">LOGIN</string>
-    <string name="btn_register">REGISTER</string>
-    <string name="btn_link_to_register">Not a member? Sign up now.</string>
-    <string name="btn_link_to_login">Already registred! Login Me.</string>
-    <string name="welcome">Welcome</string>
-    <string name="btn_logout">LOGOUT</string>
-    <string name="name">Fullname</string>
-    <string name="session">Session</string>
+    <string name="about">اعرف اكثر عنا</string>
+    <string name="hint_email">البريد الاكتروني</string>
+    <string name="hint_password">كلمة السر</string>
+    <string name="hint_name">الاسم الكامل</string>
+    <string name="btn_login">اتصل</string>
+    <string name="btn_register">سجل</string>
+    <string name="btn_link_to_register">غير مسجل ؟ سجل الان</string>
+    <string name="btn_link_to_login">مسجل سابقا . اتصل </string>
+    <string name="welcome">مرحبا</string>
+    <string name="btn_logout">خروج</string>
+    <string name="name">الاسم الكامل</string>
+    <string name="session">الاتصال</string>
 
 
 
