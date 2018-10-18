@@ -63,11 +63,7 @@ public class CasesFragment extends Fragment {
 
         prepareAlbums();
 
-        try {
-            Glide.with(this).load(R.drawable.new_event).into((ImageView) rootView.findViewById(R.id.backdrop));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
         // Inflate the layout for this fragment
         return rootView;
     }

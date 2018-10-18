@@ -1,47 +1,45 @@
-package com.ahmedderbala.espoir.Cases;
-
+package com.ahmedderbala.espoir.Contacts;
 
 import android.content.Context;
-        import android.support.v7.widget.PopupMenu;
-        import android.support.v7.widget.RecyclerView;
-        import android.view.LayoutInflater;
-        import android.view.MenuInflater;
-        import android.view.MenuItem;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.widget.ImageView;
-        import android.widget.TextView;
-        import android.widget.Toast;
+import android.support.v7.widget.PopupMenu;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ahmedderbala.espoir.R;
 import com.bumptech.glide.Glide;
 
+import java.util.List;
 
-        import java.util.List;
 
-
-public class CasesAdapter extends RecyclerView.Adapter<CasesAdapter.MyViewHolder> {
+public class MembersAdapter extends RecyclerView.Adapter<MembersAdapter.MyViewHolder> {
 
     private Context mContext;
-    private List<Case> caseList;
+    private List<Member> memberList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView title, shortDescription;
+        public TextView firstName,lastName,  phone,  email,  status,  espoirFunction,  function,  photo;
         public ImageView thumbnail, overflow;
 
         public MyViewHolder(View view) {
             super(view);
-            title = (TextView) view.findViewById(R.id.title);
-            shortDescription = (TextView) view.findViewById(R.id.shortDescription);
+            firstName = (TextView) view.findViewById(R.id.title);
+            email = (TextView) view.findViewById(R.id.shortDescription);
             thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
             overflow = (ImageView) view.findViewById(R.id.overflow);
         }
     }
 
 
-    public CasesAdapter(Context mContext, List<Case> albumList) {
+    public MembersAdapter(Context mContext, List<Member> albumList) {
         this.mContext = mContext;
-        this.caseList = albumList;
+        this.memberList = albumList;
     }
 
     @Override
@@ -54,14 +52,14 @@ public class CasesAdapter extends RecyclerView.Adapter<CasesAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        Case c = caseList.get(position);
-        holder.title.setText(c.getTitle());
-       // holder.shortDescription.setText(case.getNumOfSongs() + " songs");
-        holder.shortDescription.setText(" short description");
+        Member member = memberList.get(position);
+        holder.firstName.setText(member.getFirstName());
+        // holder.shortDescription.setText(case.getNumOfSongs() + " songs");
+        holder.email.setText(" short description");
 
 
         // loading album cover using Glide library
-        Glide.with(mContext).load(c.getThumbnail()).into(holder.thumbnail);
+        Glide.with(mContext).load(member.getPhoto()).into(holder.thumbnail);
 
         holder.overflow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,6 +106,6 @@ public class CasesAdapter extends RecyclerView.Adapter<CasesAdapter.MyViewHolder
 
     @Override
     public int getItemCount() {
-        return caseList.size();
+        return memberList.size();
     }
 }

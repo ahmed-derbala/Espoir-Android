@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ahmedderbala.espoir.Cases.CasesFragment;
@@ -18,6 +19,7 @@ import com.ahmedderbala.espoir.Contacts.ContactsFragment;
 import com.ahmedderbala.espoir.Events.EventsFragment;
 import com.ahmedderbala.espoir.R;
 import com.ahmedderbala.espoir.SettingsActivity;
+import com.bumptech.glide.Glide;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -65,6 +67,11 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         initCollapsingToolbar();
+        try {
+            Glide.with(this).load(R.drawable.new_event).into((ImageView) findViewById(R.id.backdrop));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
