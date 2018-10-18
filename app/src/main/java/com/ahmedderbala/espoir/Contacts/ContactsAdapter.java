@@ -1,6 +1,7 @@
 package com.ahmedderbala.espoir.Contacts;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -29,8 +30,8 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyView
 
         public MyViewHolder(View view) {
             super(view);
-            firstName = (TextView) view.findViewById(R.id.title);
-            email = (TextView) view.findViewById(R.id.shortDescription);
+            firstName = (TextView) view.findViewById(R.id.firstname);
+            email = (TextView) view.findViewById(R.id.email);
             thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
             overflow = (ImageView) view.findViewById(R.id.overflow);
         }
@@ -45,7 +46,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyView
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.case_card, parent, false);
+                .inflate(R.layout.contact_card, parent, false);
 
         return new MyViewHolder(itemView);
     }
@@ -54,12 +55,15 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyView
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         Contact contact = contactList.get(position);
         holder.firstName.setText(contact.getFirstName());
+
         // holder.shortDescription.setText(case.getNumOfSongs() + " songs");
-        holder.email.setText(" short description");
+        holder.email.setText("nour.mhamdi12@gmail.com");
 
 
         // loading album cover using Glide library
-        Glide.with(mContext).load(contact.getPhoto()).into(holder.thumbnail);
+        //Glide.with(mContext).load("@drawable/nour").into(holder.thumbnail);
+        Resources res = mContext.getResources(); /** from an Activity */
+        holder.thumbnail.setImageDrawable(res.getDrawable(R.drawable.nour2));
 
         holder.overflow.setOnClickListener(new View.OnClickListener() {
             @Override

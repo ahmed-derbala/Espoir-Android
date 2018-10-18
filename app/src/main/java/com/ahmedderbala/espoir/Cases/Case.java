@@ -1,6 +1,7 @@
 package com.ahmedderbala.espoir.Cases;
 
 public class Case {
+    private int id;
     private String title;
     private String shortDescription;
     private String longDescription;
@@ -10,7 +11,22 @@ public class Case {
     private String city;
     private String place;
 
+    public Case() {
+    }
+
     public Case(String title, String shortDescription, String longDescription, String thumbnail, String author, String governorate, String city, String place) {
+        this.title = title;
+        this.shortDescription = shortDescription;
+        this.longDescription = longDescription;
+        this.thumbnail = thumbnail;
+        this.author = author;
+        this.governorate = governorate;
+        this.city = city;
+        this.place = place;
+    }
+
+    public Case(int id, String title, String shortDescription, String longDescription, String thumbnail, String author, String governorate, String city, String place) {
+        this.id = id;
         this.title = title;
         this.shortDescription = shortDescription;
         this.longDescription = longDescription;

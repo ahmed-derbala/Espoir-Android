@@ -36,11 +36,11 @@ public class ContactsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_cases, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_contacts, container, false);
 
         //MainActivity.initCollapsingToolbar();
 
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.rv_contacts);
 
         contactList = new ArrayList<>();
         adapter = new ContactsAdapter(getContext(), contactList);
@@ -79,15 +79,15 @@ public class ContactsFragment extends Fragment {
                 R.drawable.album10,
                 R.drawable.album11};
 
-        Contact a = new Contact("event 1", "13");
+        Contact a = new Contact("Nour Mhamdi", "56131553");
         contactList.add(a);
 
-        a = new Contact("event 2", "8");
+        /*a = new Contact("event 2", "8");
         contactList.add(a);
 
         a = new Contact("event 3", "1l");
         contactList.add(a);
-
+*/
        /* a = new Case("Born to Die", 12, covers[3]);
         caseList.add(a);
 

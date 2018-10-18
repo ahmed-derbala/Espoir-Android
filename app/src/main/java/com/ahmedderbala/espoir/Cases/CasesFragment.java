@@ -11,19 +11,32 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.ahmedderbala.espoir.R;
 import com.ahmedderbala.espoir.activities.MainActivity;
 
+import com.ahmedderbala.espoir.app.AppController;
+import com.ahmedderbala.espoir.helper.JsonArrayPostRequest;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.bumptech.glide.Glide;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import static com.ahmedderbala.espoir.app.AppConfig.URL_LIST_CASES;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,6 +45,8 @@ public class CasesFragment extends Fragment {
     private RecyclerView recyclerView;
     private CasesAdapter adapter;
     private List<Case> caseList;
+    JsonArrayPostRequest jsonArrayRequest ;
+
 
 
     public CasesFragment() {
@@ -44,7 +59,8 @@ public class CasesFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_cases, container, false);
 
-        //MainActivity.initCollapsingToolbar();
+        listCases();
+
 
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
 
@@ -61,64 +77,11 @@ public class CasesFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.setAdapter(adapter);
 
-        prepareAlbums();
+        //prepareAlbums();
 
 
         // Inflate the layout for this fragment
         return rootView;
-    }
-
-
-
-
-    /**
-     * Adding few albums for testing
-     */
-    private void prepareAlbums() {
-        int[] covers = new int[]{
-                R.drawable.album1,
-                R.drawable.album2,
-                R.drawable.album3,
-                R.drawable.album4,
-                R.drawable.album5,
-                R.drawable.album6,
-                R.drawable.album7,
-                R.drawable.album8,
-                R.drawable.album9,
-                R.drawable.album10,
-                R.drawable.album11};
-
-        Case a = new Case("event 1", "13");
-        caseList.add(a);
-
-        a = new Case("event 2", "8");
-        caseList.add(a);
-
-        a = new Case("event 3", "1l");
-        caseList.add(a);
-
-       /* a = new Case("Born to Die", 12, covers[3]);
-        caseList.add(a);
-
-        a = new Case("Honeymoon", 14, covers[4]);
-        caseList.add(a);*/
-
-       /* a = new Album("I Need a Doctor", 1, covers[5]);
-        albumList.add(a);
-
-        a = new Album("Loud", 11, covers[6]);
-        albumList.add(a);
-
-        a = new Album("Legend", 14, covers[7]);
-        albumList.add(a);
-
-        a = new Album("Hello", 11, covers[8]);
-        albumList.add(a);
-
-        a = new Album("Greatest Hits", 17, covers[9]);
-        albumList.add(a);*/
-
-        adapter.notifyDataSetChanged();
     }
 
     /**
@@ -165,6 +128,58 @@ public class CasesFragment extends Fragment {
     private int dpToPx(int dp) {
         Resources r = getResources();
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
+    }
+
+    private void listCases()
+    {
+        Log.d("URL", URL_LIST_CASES);
+        HashMap<String, String> params = new HashMap<String, String>();
+        jsonArrayRequest = new JsonArrayPostRequest(URL_LIST_CASES,
+                new Response.Listener<JSONArray>()
+                {
+
+                    @Override
+                    public void onResponse(JSONArray array) {
+                        for(int i = 0; i<array.length(); i++) {
+                            Case GetDataAdapter2 = new Case();
+
+                            JSONObject json = null;
+                            try {
+                                json = array.getJSONObject(i);
+                                GetDataAdapter2.setTitle(json.getString("title"));
+                                GetDataAdapter2.setShortDescription(json.getString("shortDescription"));
+                               /* GetDataAdapter2.setPlaceType(json.getString("placeType"));
+                                GetDataAdapter2.setPhoto(json.getString("photo"));
+                                GetDataAdapter2.setTelephone(json.getString("telephone"));
+                                GetDataAdapter2.setPlaceId(json.getString("placeId"));
+                                GetDataAdapter2.setIdfav(json.getString("id"));*/
+
+
+
+                            }
+                            catch (JSONException e)
+                            {
+
+                                e.printStackTrace();
+                            }
+
+                            caseList.add(GetDataAdapter2);
+                            recyclerView.setAdapter(adapter);
+                        }
+                    }
+                }, new Response.ErrorListener()
+        {
+
+            @Override
+            public void onErrorResponse(VolleyError error)
+            {
+                Toast.makeText(getActivity(), "Pas de favoris", Toast.LENGTH_LONG).show();
+                Log.d("PLACETIITLE", "onResponse: "+error.getMessage());
+            }
+        },params);
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonArrayRequest, "hhh");
     }
 
 }

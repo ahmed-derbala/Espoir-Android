@@ -19,9 +19,9 @@
             <ImageView
                 android:id="@+id/thumbnail"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/album_cover_height"
-                android:background="?attr/selectableItemBackgroundBorderless"
+                android:layout_height="200dp"
                 android:clickable="true"
+                android:src="@drawable/nour"
                 android:scaleType="fitXY" />
 
             <TextView
@@ -38,7 +38,8 @@
 
             <TextView
                 android:id="@+id/email"
-                android:text="shortDescription is empty"
+                android:text="empty"
+                android:textColor="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/title"
