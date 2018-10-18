@@ -68,10 +68,7 @@ public class CasesFragment extends Fragment {
         return rootView;
     }
 
-    /**
-     * Initializing collapsing toolbar
-     * Will show and hide the toolbar title on scroll
-     */
+
 
 
     /**

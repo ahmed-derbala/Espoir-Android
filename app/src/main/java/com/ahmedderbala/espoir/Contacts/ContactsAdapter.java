@@ -18,10 +18,10 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 
-public class MembersAdapter extends RecyclerView.Adapter<MembersAdapter.MyViewHolder> {
+public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyViewHolder> {
 
     private Context mContext;
-    private List<Member> memberList;
+    private List<Contact> contactList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView firstName,lastName,  phone,  email,  status,  espoirFunction,  function,  photo;
@@ -37,9 +37,9 @@ public class MembersAdapter extends RecyclerView.Adapter<MembersAdapter.MyViewHo
     }
 
 
-    public MembersAdapter(Context mContext, List<Member> albumList) {
+    public ContactsAdapter(Context mContext, List<Contact> albumList) {
         this.mContext = mContext;
-        this.memberList = albumList;
+        this.contactList = albumList;
     }
 
     @Override
@@ -52,14 +52,14 @@ public class MembersAdapter extends RecyclerView.Adapter<MembersAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        Member member = memberList.get(position);
-        holder.firstName.setText(member.getFirstName());
+        Contact contact = contactList.get(position);
+        holder.firstName.setText(contact.getFirstName());
         // holder.shortDescription.setText(case.getNumOfSongs() + " songs");
         holder.email.setText(" short description");
 
 
         // loading album cover using Glide library
-        Glide.with(mContext).load(member.getPhoto()).into(holder.thumbnail);
+        Glide.with(mContext).load(contact.getPhoto()).into(holder.thumbnail);
 
         holder.overflow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,6 +106,6 @@ public class MembersAdapter extends RecyclerView.Adapter<MembersAdapter.MyViewHo
 
     @Override
     public int getItemCount() {
-        return memberList.size();
+        return contactList.size();
     }
 }

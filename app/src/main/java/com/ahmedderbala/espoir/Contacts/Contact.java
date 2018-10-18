@@ -1,6 +1,6 @@
 package com.ahmedderbala.espoir.Contacts;
 
-public class Member {
+public class Contact {
     private String firstName;
     private String lastName;
     private String phone;
@@ -10,7 +10,7 @@ public class Member {
     private String function;
     private String photo;
 
-    public Member(String firstName, String lastName, String phone, String email, String status, String espoirFunction, String function, String photo) {
+    public Contact(String firstName, String lastName, String phone, String email, String status, String espoirFunction, String function, String photo) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
@@ -19,6 +19,11 @@ public class Member {
         this.espoirFunction = espoirFunction;
         this.function = function;
         this.function = photo;
+    }
+
+    public Contact(String firstName, String email) {
+        this.firstName = firstName;
+        this.email = email;
     }
 
     public String getFirstName() {
