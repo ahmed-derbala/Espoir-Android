@@ -15,6 +15,14 @@
     <string name="btn_logout">LOGOUT</string>
     <string name="name">Fullname</string>
     <string name="session">Session</string>
+    <string name="action_save_case">Save</string>
+    <string name="action_report_case">Report</string>
+    <string name="backdrop_title">New Event</string>
+    <string name="backdrop_subtitle">New Event subtitle</string>
+
+
+
+
 
 
 

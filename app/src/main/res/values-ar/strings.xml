@@ -15,6 +15,10 @@
     <string name="btn_logout">خروج</string>
     <string name="name">الاسم الكامل</string>
     <string name="session">الاتصال</string>
+    <string name="action_save_case">احتفظ</string>
+    <string name="action_report_case">ابلاغ</string>
+    <string name="backdrop_title">تظاهرة جديدة</string>
+    <string name="backdrop_subtitle">معلومات عن التظاهرة</string>
 
 
 
