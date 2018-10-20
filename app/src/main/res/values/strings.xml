@@ -20,11 +20,7 @@
     <string name="backdrop_title">New Event</string>
     <string name="backdrop_subtitle">New Event subtitle</string>
     <string name="no_data">No Data</string>
-
-
-
-
-
+    <string name="not_logged_in">You are not logged in</string>
 
 
 

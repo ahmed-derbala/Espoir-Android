@@ -40,7 +40,7 @@ public class ContactsFragment extends Fragment {
 
         //MainActivity.initCollapsingToolbar();
 
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.rv_contacts);
+        recyclerView = rootView.findViewById(R.id.rv_contacts);
 
         contactList = new ArrayList<>();
         adapter = new ContactsAdapter(getContext(), contactList);

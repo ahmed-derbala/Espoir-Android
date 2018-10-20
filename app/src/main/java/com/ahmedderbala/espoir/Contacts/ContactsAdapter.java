@@ -25,15 +25,15 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyView
     private List<Contact> contactList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView firstName,lastName,  phone,  email,  status,  espoirFunction,  function,  photo;
+        public TextView firstName, lastName, phone, email, status, espoirFunction, function, photo;
         public ImageView thumbnail, overflow;
 
         public MyViewHolder(View view) {
             super(view);
-            firstName = (TextView) view.findViewById(R.id.firstname);
-            email = (TextView) view.findViewById(R.id.email);
-            thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
-            overflow = (ImageView) view.findViewById(R.id.overflow);
+            firstName = view.findViewById(R.id.firstname);
+            email = view.findViewById(R.id.email);
+            thumbnail = view.findViewById(R.id.thumbnail);
+            overflow = view.findViewById(R.id.overflow);
         }
     }
 

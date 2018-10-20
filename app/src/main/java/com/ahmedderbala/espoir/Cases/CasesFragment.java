@@ -1,14 +1,11 @@
 package com.ahmedderbala.espoir.Cases;
 
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -16,20 +13,22 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.ahmedderbala.espoir.R;
-import com.ahmedderbala.espoir.activities.MainActivity;
 
 import com.ahmedderbala.espoir.app.AppConfig;
 import com.ahmedderbala.espoir.app.AppController;
 import com.ahmedderbala.espoir.helper.JsonArrayPostRequest;
+import com.ahmedderbala.espoir.helper.SQLiteHandler;
+import com.ahmedderbala.espoir.helper.SessionManager;
+import com.ahmedderbala.espoir.user.LoginActivity;
+import com.ahmedderbala.espoir.user.LogoutActivity;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.bumptech.glide.Glide;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -49,8 +48,11 @@ public class CasesFragment extends Fragment {
     private RecyclerView recyclerView;
     private CasesAdapter adapter;
     private List<Case> caseList;
-    JsonArrayPostRequest jsonArrayRequest ;
+    JsonArrayPostRequest jsonArrayRequest;
     private final String TAG = "CasesFragment";
+    private Button addCaseBTN;
+    private SessionManager session;
+    private SQLiteHandler db;
 
     public CasesFragment() {
         // Required empty public constructor
@@ -62,10 +64,12 @@ public class CasesFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_cases, container, false);
 
+
+
         listCases();
 
 
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
+        recyclerView = rootView.findViewById(R.id.recycler_view);
 
         caseList = new ArrayList<>();
         adapter = new CasesAdapter(getContext(), caseList);
@@ -81,6 +85,34 @@ public class CasesFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         //prepareAlbums();
+        addCaseBTN = rootView.findViewById(R.id.addCaseBTN);
+        addCaseBTN.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                // SQLite database handler
+                db = new SQLiteHandler(getContext());
+
+                // Session manager
+                session = new SessionManager(getContext());
+        /*HashMap<String, String> a = db.getUserDetails();
+        Log.e(TAG, a.toString() );
+        Log.e(TAG, a.get("username"));*/
+                if (session.isLoggedIn()) {
+                    // User is already logged in. Take him to main activity
+                    Intent intent = new Intent(getActivity(), AddCaseActivity.class);
+                    startActivity(intent);
+                    //finish();
+                    addCase("a", "b", "c", "v", "g", "f", "f", "h");
+
+                }
+                else
+                {
+                    Toast.makeText(getActivity(), R.string.not_logged_in, Toast.LENGTH_LONG).show();
+
+                }
+
+            }
+        });
 
 
         // Inflate the layout for this fragment
@@ -133,17 +165,15 @@ public class CasesFragment extends Fragment {
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }
 
-    private void listCases()
-    {
+    private void listCases() {
         Log.d("URL", URL_LIST_CASES);
         HashMap<String, String> params = new HashMap<String, String>();
         jsonArrayRequest = new JsonArrayPostRequest(URL_LIST_CASES,
-                new Response.Listener<JSONArray>()
-                {
+                new Response.Listener<JSONArray>() {
 
                     @Override
                     public void onResponse(JSONArray array) {
-                        for(int i = 0; i<array.length(); i++) {
+                        for (int i = 0; i < array.length(); i++) {
                             Case GetDataAdapter = new Case();
 
                             JSONObject json = null;
@@ -157,32 +187,29 @@ public class CasesFragment extends Fragment {
                                 GetDataAdapter.setGovernorate(json.getString("governorate"));
                                 GetDataAdapter.setCity(json.getString("city"));
                                 GetDataAdapter.setPlace(json.getString("place"));
-                            }
-                            catch (JSONException e)
-                            {
+                            } catch (JSONException e) {
                                 e.printStackTrace();
                             }
                             caseList.add(GetDataAdapter);
                             recyclerView.setAdapter(adapter);
                         }
                     }
-                }, new Response.ErrorListener()
-        {
+                }, new Response.ErrorListener() {
 
             @Override
-            public void onErrorResponse(VolleyError error)
-            {
+            public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getActivity(), R.string.no_data, Toast.LENGTH_LONG).show();
-                Log.e("CasesFragment", "onResponse: "+error.getMessage());
+                Log.e("CasesFragment", "onResponse: " + error.getMessage());
             }
-        },params);
+        }, params);
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(jsonArrayRequest, "hhh");
     }
 
-    private void addCase(final String title, final String shortDescription, final String longDescription, final String thumbnail, final String author, final Double governorate, final Double city,final String place) {
-
+    public void addCase(final String title, final String shortDescription, final String longDescription, final String thumbnail, final String author, final String governorate, final String city, final String place) {
+// Tag used to cancel the request
+        String tag_string_req = "req_register";
 
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
@@ -227,19 +254,15 @@ public class CasesFragment extends Fragment {
             protected Map<String, String> getParams() {
                 // Posting params to register url
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("placeId", placeId);
-                params.put("username", username);
-                params.put("placeTitle", placeTitle);
-                params.put("address", adr);
-                params.put("placeType", placeType);
-                params.put("latitude", latitude.toString());
-                params.put("longitude", longitude.toString());
-                params.put("placePhoto", photo);
-
-
-
-
-
+                params.put("username", "ahmed");
+                params.put("title", title);
+                params.put("shortDescription", shortDescription);
+                params.put("longDescription", longDescription);
+                params.put("thumbnail", thumbnail);
+                params.put("author", author);
+                params.put("governorate", governorate);
+                params.put("city", city);
+                params.put("place", place);
                 return params;
             }
 

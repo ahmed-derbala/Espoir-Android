@@ -31,6 +31,8 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 	// Login Table Columns names
 	private static final String KEY_ID = "id";
 	private static final String KEY_NAME = "name";
+	private static final String KEY_LASTNAME = "lastName";
+	private static final String KEY_USERNAME = "username";
 	private static final String KEY_EMAIL = "email";
 	private static final String KEY_UID = "uid";
 	private static final String KEY_CREATED_AT = "created_at";
@@ -43,7 +45,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		String CREATE_LOGIN_TABLE = "CREATE TABLE " + TABLE_USER + "("
-				+ KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
+				+ KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"+ KEY_LASTNAME + " TEXT,"+ KEY_USERNAME + " TEXT,"
 				+ KEY_EMAIL + " TEXT UNIQUE," + KEY_UID + " TEXT,"
 				+ KEY_CREATED_AT + " TEXT" + ")";
 		db.execSQL(CREATE_LOGIN_TABLE);
@@ -64,12 +66,14 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 	/**
 	 * Storing user details in database
 	 * */
-	public void addUser(String name, String email, String uid, String created_at) {
+	public void addUser(String name,String lastName,String username, String email, String uid, String created_at) {
 		SQLiteDatabase db = this.getWritableDatabase();
 
 		ContentValues values = new ContentValues();
 		values.put(KEY_NAME, name); // Name
-		values.put(KEY_EMAIL, email); // Email
+		values.put(KEY_LASTNAME, lastName); // Name
+		values.put(KEY_USERNAME, username); // Name
+        values.put(KEY_EMAIL, email); // Email
 		values.put(KEY_UID, uid); // Email
 		values.put(KEY_CREATED_AT, created_at); // Created At
 
@@ -93,9 +97,11 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 		cursor.moveToFirst();
 		if (cursor.getCount() > 0) {
 			user.put("name", cursor.getString(1));
-			user.put("email", cursor.getString(2));
-			user.put("uid", cursor.getString(3));
-			user.put("created_at", cursor.getString(4));
+			user.put("lastName", cursor.getString(2));
+			user.put("username", cursor.getString(3));
+			user.put("email", cursor.getString(4));
+			user.put("uid", cursor.getString(5));
+			user.put("created_at", cursor.getString(6));
 		}
 		cursor.close();
 		db.close();

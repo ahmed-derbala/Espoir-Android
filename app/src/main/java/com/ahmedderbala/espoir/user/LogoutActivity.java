@@ -1,4 +1,4 @@
-package com.ahmedderbala.espoir.activities;
+package com.ahmedderbala.espoir.user;
 
 
 import android.app.Activity;
@@ -28,10 +28,10 @@ public class LogoutActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logout);
 
-        txtName = (TextView) findViewById(R.id.name);
-        txtEmail = (TextView) findViewById(R.id.email);
-        btnLogout = (Button) findViewById(R.id.btnLogout);
-        btnMainActivity = (Button) findViewById(R.id.btnMainActivity);
+        txtName = findViewById(R.id.name);
+        txtEmail = findViewById(R.id.email);
+        btnLogout = findViewById(R.id.btnLogout);
+        btnMainActivity = findViewById(R.id.btnMainActivity);
 
 
         // SqLite database handler

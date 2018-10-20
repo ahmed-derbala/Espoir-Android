@@ -25,7 +25,7 @@ public  class JsonArrayPostRequest extends Request<JSONArray> {
         mParam=param;
     }
     @Override
-    protected Map<String, String> getParams() throws AuthFailureError {
+    protected Map<String, String> getParams() {
         return mParam;
     }
 

@@ -35,12 +35,12 @@ public class CasesAdapter extends RecyclerView.Adapter<CasesAdapter.MyViewHolder
 
         public MyViewHolder(View view) {
             super(view);
-            title = (TextView) view.findViewById(R.id.title);
-            shortDescription = (TextView) view.findViewById(R.id.shortDescription);
-            author = (TextView) view.findViewById(R.id.author);
-            city = (TextView) view.findViewById(R.id.city);
-            thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
-            overflow = (ImageView) view.findViewById(R.id.overflow);
+            title = view.findViewById(R.id.title);
+            shortDescription = view.findViewById(R.id.shortDescription);
+            author = view.findViewById(R.id.author);
+            city = view.findViewById(R.id.city);
+            thumbnail = view.findViewById(R.id.thumbnail);
+            overflow = view.findViewById(R.id.overflow);
         }
     }
 

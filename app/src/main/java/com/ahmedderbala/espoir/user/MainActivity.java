@@ -1,4 +1,4 @@
-package com.ahmedderbala.espoir.activities;
+package com.ahmedderbala.espoir.user;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -63,8 +63,8 @@ public class MainActivity extends AppCompatActivity {
         fm.beginTransaction().add(R.id.main_container, contactsFragment, "3").hide(contactsFragment).commit();
         fm.beginTransaction().add(R.id.main_container,casesFragment, "1").commit();
 
-        mTextMessage = (TextView) findViewById(R.id.message);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        mTextMessage = findViewById(R.id.message);
+        BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         initCollapsingToolbar();
         try {
@@ -97,9 +97,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void initCollapsingToolbar() {
         final CollapsingToolbarLayout collapsingToolbar =
-                (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+                findViewById(R.id.collapsing_toolbar);
         collapsingToolbar.setTitle(" ");
-        AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.appBarLayout);
+        AppBarLayout appBarLayout = findViewById(R.id.appBarLayout);
         appBarLayout.setExpanded(true);
 
         // hiding & showing the title when toolbar expanded & collapsed
