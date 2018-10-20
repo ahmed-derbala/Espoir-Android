@@ -15,9 +15,12 @@ import android.content.Context;
 
 import com.ahmedderbala.espoir.R;
 import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 
 
-        import java.util.List;
+import java.util.List;
+
+import static com.ahmedderbala.espoir.app.AppConfig.URL_CASE_THUMBNAIL;
 
 
 public class CasesAdapter extends RecyclerView.Adapter<CasesAdapter.MyViewHolder> {
@@ -26,13 +29,15 @@ public class CasesAdapter extends RecyclerView.Adapter<CasesAdapter.MyViewHolder
     private List<Case> caseList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView title, shortDescription;
+        public TextView title, shortDescription,author,city;
         public ImageView thumbnail, overflow;
 
         public MyViewHolder(View view) {
             super(view);
             title = (TextView) view.findViewById(R.id.title);
             shortDescription = (TextView) view.findViewById(R.id.shortDescription);
+            author = (TextView) view.findViewById(R.id.author);
+            city = (TextView) view.findViewById(R.id.city);
             thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
             overflow = (ImageView) view.findViewById(R.id.overflow);
         }
@@ -56,11 +61,15 @@ public class CasesAdapter extends RecyclerView.Adapter<CasesAdapter.MyViewHolder
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         Case c = caseList.get(position);
         holder.title.setText(c.getTitle());
-       // holder.shortDescription.setText(case.getNumOfSongs() + " songs");
-        holder.shortDescription.setText(" short description");
+        holder.shortDescription.setText(c.getShortDescription());
+        holder.author.setText(c.getAuthor());
+        holder.city.setText(c.getCity());
+        Picasso.with(mContext).load(URL_CASE_THUMBNAIL+c.getThumbnail()).into(holder.thumbnail);
 
 
-        // loading album cover using Glide library
+
+
+       /* // loading album cover using Glide library
         Glide.with(mContext).load(c.getThumbnail()).into(holder.thumbnail);
 
         holder.overflow.setOnClickListener(new View.OnClickListener() {
@@ -68,7 +77,7 @@ public class CasesAdapter extends RecyclerView.Adapter<CasesAdapter.MyViewHolder
             public void onClick(View view) {
                 showPopupMenu(holder.overflow);
             }
-        });
+        });*/
     }
 
     /**

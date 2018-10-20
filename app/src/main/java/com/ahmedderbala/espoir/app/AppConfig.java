@@ -2,8 +2,8 @@ package com.ahmedderbala.espoir.app;
 
 public class AppConfig {
 	//ip
-	//public static String URL_IP = "http://derbalaahmed531992.000webhostapp.com/";
-	public static String URL_IP = "http://192.168.43.17/";
+	public static String URL_IP = "http://derbalaahmed531992.000webhostapp.com/";
+	//public static String URL_IP = "http://192.168.43.17/";
 
 
 	//server
@@ -15,6 +15,10 @@ public class AppConfig {
 
 	// Server user register url
 	public static String URL_REGISTER = URL_SERVER+"register.php";
-	public static String URL_LIST_CASES = URL_SERVER+"listCases.php";
+	//CASES
+	public static String URL_CASES = "cases/";
+	public static String URL_LIST_CASES = URL_SERVER+URL_CASES+"listCases.php";
+	public static String URL_CASE_THUMBNAIL = URL_SERVER+URL_CASES+"images/";
+
 
 }

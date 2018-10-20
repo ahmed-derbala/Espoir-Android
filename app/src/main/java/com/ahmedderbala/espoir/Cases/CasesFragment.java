@@ -141,18 +141,20 @@ public class CasesFragment extends Fragment {
                     @Override
                     public void onResponse(JSONArray array) {
                         for(int i = 0; i<array.length(); i++) {
-                            Case GetDataAdapter2 = new Case();
+                            Case GetDataAdapter = new Case();
 
                             JSONObject json = null;
                             try {
                                 json = array.getJSONObject(i);
-                                GetDataAdapter2.setTitle(json.getString("title"));
-                                GetDataAdapter2.setShortDescription(json.getString("shortDescription"));
-                               /* GetDataAdapter2.setPlaceType(json.getString("placeType"));
-                                GetDataAdapter2.setPhoto(json.getString("photo"));
-                                GetDataAdapter2.setTelephone(json.getString("telephone"));
-                                GetDataAdapter2.setPlaceId(json.getString("placeId"));
-                                GetDataAdapter2.setIdfav(json.getString("id"));*/
+                                GetDataAdapter.setTitle(json.getString("title"));
+                                GetDataAdapter.setShortDescription(json.getString("shortDescription"));
+                                GetDataAdapter.setLongDescription(json.getString("longDescription"));
+                                GetDataAdapter.setThumbnail(json.getString("thumbnail"));
+                                GetDataAdapter.setAuthor(json.getString("author"));
+                                GetDataAdapter.setGovernorate(json.getString("governorate"));
+                                GetDataAdapter.setCity(json.getString("city"));
+                                GetDataAdapter.setPlace(json.getString("place"));
+
 
 
 
@@ -163,7 +165,7 @@ public class CasesFragment extends Fragment {
                                 e.printStackTrace();
                             }
 
-                            caseList.add(GetDataAdapter2);
+                            caseList.add(GetDataAdapter);
                             recyclerView.setAdapter(adapter);
                         }
                     }
