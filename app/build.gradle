@@ -6,9 +6,9 @@ android {
         applicationId "com.ahmedderbala.espoir"
         minSdkVersion 21
         targetSdkVersion 28
-        versionName '1.0.4 alpha'
+        versionName '1.0.5 alpha'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        versionCode 5
+        versionCode 6
     }
     buildTypes {
         release {

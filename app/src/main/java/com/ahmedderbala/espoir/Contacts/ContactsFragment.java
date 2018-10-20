@@ -55,7 +55,7 @@ public class ContactsFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.setAdapter(adapter);
 
-        prepareAlbums();
+        //prepareAlbums();
 
 
         // Inflate the layout for this fragment
@@ -65,7 +65,7 @@ public class ContactsFragment extends Fragment {
     /**
      * Adding few albums for testing
      */
-    private void prepareAlbums() {
+   /* private void prepareAlbums() {
         int[] covers = new int[]{
                 R.drawable.album1,
                 R.drawable.album2,
@@ -81,7 +81,7 @@ public class ContactsFragment extends Fragment {
 
         Contact a = new Contact("Nour Mhamdi", "56131553");
         contactList.add(a);
-
+*/
         /*a = new Contact("event 2", "8");
         contactList.add(a);
 
@@ -109,8 +109,8 @@ public class ContactsFragment extends Fragment {
         a = new Album("Greatest Hits", 17, covers[9]);
         albumList.add(a);*/
 
-        adapter.notifyDataSetChanged();
-    }
+       /* adapter.notifyDataSetChanged();
+    }*/
 
     /**
      * RecyclerView item decoration - give equal margin around grid item

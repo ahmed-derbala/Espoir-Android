@@ -22,10 +22,13 @@ import android.widget.Toast;
 import com.ahmedderbala.espoir.R;
 import com.ahmedderbala.espoir.activities.MainActivity;
 
+import com.ahmedderbala.espoir.app.AppConfig;
 import com.ahmedderbala.espoir.app.AppController;
 import com.ahmedderbala.espoir.helper.JsonArrayPostRequest;
+import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
 
 import org.json.JSONArray;
@@ -35,6 +38,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.ahmedderbala.espoir.app.AppConfig.URL_LIST_CASES;
 
@@ -46,8 +50,7 @@ public class CasesFragment extends Fragment {
     private CasesAdapter adapter;
     private List<Case> caseList;
     JsonArrayPostRequest jsonArrayRequest ;
-
-
+    private final String TAG = "CasesFragment";
 
     public CasesFragment() {
         // Required empty public constructor
@@ -154,17 +157,11 @@ public class CasesFragment extends Fragment {
                                 GetDataAdapter.setGovernorate(json.getString("governorate"));
                                 GetDataAdapter.setCity(json.getString("city"));
                                 GetDataAdapter.setPlace(json.getString("place"));
-
-
-
-
                             }
                             catch (JSONException e)
                             {
-
                                 e.printStackTrace();
                             }
-
                             caseList.add(GetDataAdapter);
                             recyclerView.setAdapter(adapter);
                         }
@@ -175,13 +172,81 @@ public class CasesFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error)
             {
-                Toast.makeText(getActivity(), "Pas de favoris", Toast.LENGTH_LONG).show();
-                Log.d("PLACETIITLE", "onResponse: "+error.getMessage());
+                Toast.makeText(getActivity(), R.string.no_data, Toast.LENGTH_LONG).show();
+                Log.e("CasesFragment", "onResponse: "+error.getMessage());
             }
         },params);
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(jsonArrayRequest, "hhh");
+    }
+
+    private void addCase(final String title, final String shortDescription, final String longDescription, final String thumbnail, final String author, final Double governorate, final Double city,final String place) {
+
+
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                AppConfig.URL_ADD_CASE, new Response.Listener<String>() {
+
+
+            @Override
+            public void onResponse(String response) {
+
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    boolean error = jObj.getBoolean("error");
+                    if (!error) {
+                        Log.d(TAG, "onResponse: ENTERING ERROR");
+                        Toast.makeText(getActivity(), jObj.getString("error_msg"), Toast.LENGTH_LONG).show();
+
+                    } else {
+
+                        // Error occurred in registration. Get the error
+                        // message
+                        String errorMsg = jObj.getString("error_msg");
+                        Toast.makeText(getActivity(),
+                                errorMsg, Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Favoris Error: " + error.getMessage());
+                // Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "you should log in first", Toast.LENGTH_LONG).show();
+
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting params to register url
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("placeId", placeId);
+                params.put("username", username);
+                params.put("placeTitle", placeTitle);
+                params.put("address", adr);
+                params.put("placeType", placeType);
+                params.put("latitude", latitude.toString());
+                params.put("longitude", longitude.toString());
+                params.put("placePhoto", photo);
+
+
+
+
+
+                return params;
+            }
+
+        };
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
 }

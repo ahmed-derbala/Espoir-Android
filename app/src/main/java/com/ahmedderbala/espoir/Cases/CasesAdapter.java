@@ -4,7 +4,8 @@ package com.ahmedderbala.espoir.Cases;
 import android.content.Context;
         import android.support.v7.widget.PopupMenu;
         import android.support.v7.widget.RecyclerView;
-        import android.view.LayoutInflater;
+import android.util.Log;
+import android.view.LayoutInflater;
         import android.view.MenuInflater;
         import android.view.MenuItem;
         import android.view.View;
@@ -64,7 +65,10 @@ public class CasesAdapter extends RecyclerView.Adapter<CasesAdapter.MyViewHolder
         holder.shortDescription.setText(c.getShortDescription());
         holder.author.setText(c.getAuthor());
         holder.city.setText(c.getCity());
-        Picasso.with(mContext).load(URL_CASE_THUMBNAIL+c.getThumbnail()).into(holder.thumbnail);
+        //Picasso.with(mContext).load(URL_CASE_THUMBNAIL+c.getThumbnail()).into(holder.thumbnail);
+        Picasso.with(mContext).load(c.getThumbnail()).into(holder.thumbnail);
+        Log.e("PHOTO", c.getThumbnail() );
+
 
 
 
