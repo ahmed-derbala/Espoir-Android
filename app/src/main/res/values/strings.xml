@@ -57,7 +57,7 @@
     <!-- We can overwrite the values of the library's strings in order to customize them -->
     <string name="vertical_form_stepper_form_discard_question">Discard alarm?</string>
     <string name="vertical_form_stepper_form_info_will_be_lost">All the information about this new alarm will be lost</string>
-    <string name="vertical_form_stepper_form_confirm_button">Add alarm</string>
+    <string name="vertical_form_stepper_form_confirm_button">Add case</string>
     <string name="vertical_form_stepper_form_sending_data_message">Adding new alarm…</string>
     //end new
 

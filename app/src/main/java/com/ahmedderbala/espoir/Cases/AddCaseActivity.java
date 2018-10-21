@@ -1,6 +1,7 @@
 package com.ahmedderbala.espoir.Cases;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -18,6 +19,8 @@ import android.widget.Toast;
 import com.ahmedderbala.espoir.R;
 import com.ahmedderbala.espoir.app.AppConfig;
 import com.ahmedderbala.espoir.app.AppController;
+import com.ahmedderbala.espoir.helper.SQLiteHandler;
+import com.ahmedderbala.espoir.helper.SessionManager;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -41,9 +44,13 @@ public class AddCaseActivity extends AppCompatActivity implements VerticalSteppe
     private static final String DISCLAIMER = "disclaimer";
     private FloatingActionButton fab;
     private TextView information, disclaimer;
-    private EditText name,email;
+    private EditText title,shortDescription,longDescription,thumbnail,governorate,city,place,latitude,longitude;
     private boolean dataReceived = false;
     private VerticalStepperFormLayout verticalStepperForm;
+    private ProgressDialog progressDialog;
+    private SessionManager session;
+    private SQLiteHandler db;
+
 
 
     @Override
@@ -63,9 +70,9 @@ public class AddCaseActivity extends AppCompatActivity implements VerticalSteppe
         information = (TextView) findViewById(R.id.information);
         disclaimer = (TextView) findViewById(R.id.disclaimer);*/
 
-        String[] mySteps = {"Name", "Email", "Phone Number"};
-        int colorPrimary = ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary);
-        int colorPrimaryDark = ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark);
+        String[] mySteps = {"Title", "Short description" ,"Long description","Thumbnail","Governorate","City","Place","Latitude","Longitude"};
+        int colorPrimary = ContextCompat.getColor(getApplicationContext(), R.color.red);
+        int colorPrimaryDark = ContextCompat.getColor(getApplicationContext(), R.color.red);
 
         // Finding the view
         verticalStepperForm = (VerticalStepperFormLayout) findViewById(R.id.vertical_stepper_form);
@@ -78,7 +85,7 @@ public class AddCaseActivity extends AppCompatActivity implements VerticalSteppe
                 .init();
     }
 
-    /*@Override
+   /* @Override
     public void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
 
@@ -99,9 +106,9 @@ public class AddCaseActivity extends AppCompatActivity implements VerticalSteppe
             savedInstanceState.putString(INFORMATION, information.getText().toString());
             savedInstanceState.putString(DISCLAIMER, disclaimer.getText().toString());
         }
-    }
+    }*/
 
-    @Override
+   /* @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
@@ -160,7 +167,7 @@ public class AddCaseActivity extends AppCompatActivity implements VerticalSteppe
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e(TAG, "Favoris Error: " + error.getMessage());
+                Log.e(TAG, "ADDCASE_ERROR: " + error.getMessage());
                 // Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
                 Toast.makeText(getApplicationContext(), "you should log in first", Toast.LENGTH_LONG).show();
 
@@ -194,42 +201,126 @@ public class AddCaseActivity extends AppCompatActivity implements VerticalSteppe
         View view = null;
         switch (stepNumber) {
             case 0:
-                view = createNameStep();
+                view = createTitleStep();
                 break;
             case 1:
-                view = createEmailStep();
+                view = createShortDescriptionStep();
                 break;
             case 2:
-                view = createPhoneNumberStep();
+                view = createLongDescriptionStep();
+                break;
+            case 3:
+                view = createThumbnailStep();
+                break;
+            case 4:
+                view = createGovernorateStep();
+                break;
+            case 5:
+                view = createCityStep();
+                break;
+            case 6:
+                view = createPlaceStep();
+                break;
+            case 7:
+                view = createGovernorateStep();
+                break;
+            case 8:
+                view = createLatitudeStep();
+                break;
+            case 9:
+                view = createLongitudeStep();
                 break;
         }
         return view;
     }
 
-    private View createNameStep() {
+    private View createTitleStep() {
         // Here we generate programmatically the view that will be added by the system to the step content layout
-        name = new EditText(this);
-        name.setSingleLine(true);
-        name.setHint("Your name");
-
-        return name;
+        title = new EditText(this);
+        title.setSingleLine(true);
+        title.setHint("Title");
+        return title;
     }
 
-    private View createEmailStep() {
+    /*private View createEmailStep() {
         // In this case we generate the view by inflating a XML file
         LayoutInflater inflater = LayoutInflater.from(getBaseContext());
         LinearLayout emailLayoutContent = (LinearLayout) inflater.inflate(R.layout.email_step_layout, null, false);
-        email = (EditText) emailLayoutContent.findViewById(R.id.email);
+        email = (EditText) emailLayoutContent.findViewById(R.id.shortDescriptionStep);
 
         return emailLayoutContent;
+    }*/
+
+    private View createShortDescriptionStep() {
+        // Here we generate programmatically the view that will be added by the system to the step content layout
+        shortDescription = new EditText(this);
+        shortDescription.setSingleLine(true);
+        shortDescription.setHint("Short description");
+        return shortDescription;
     }
 
-    private View createPhoneNumberStep() {
+    private View createLongDescriptionStep() {
+        // Here we generate programmatically the view that will be added by the system to the step content layout
+        longDescription = new EditText(this);
+        longDescription.setSingleLine(true);
+        longDescription.setHint("Long description");
+        return longDescription;
+    }
+
+    private View createThumbnailStep() {
+        // Here we generate programmatically the view that will be added by the system to the step content layout
+        thumbnail = new EditText(this);
+        thumbnail.setSingleLine(true);
+        thumbnail.setHint("Thumbnail");
+        return thumbnail;
+    }
+
+    private View createGovernorateStep() {
+        // Here we generate programmatically the view that will be added by the system to the step content layout
+        governorate = new EditText(this);
+        governorate.setSingleLine(true);
+        governorate.setHint("Governorate");
+        return governorate;
+    }
+
+    private View createCityStep() {
+        // Here we generate programmatically the view that will be added by the system to the step content layout
+        city = new EditText(this);
+        city.setSingleLine(true);
+        city.setHint("City");
+        return city;
+    }
+
+    private View createPlaceStep() {
+        // Here we generate programmatically the view that will be added by the system to the step content layout
+        place = new EditText(this);
+        place.setSingleLine(true);
+        place.setHint("Place");
+        return place;
+    }
+
+    private View createLatitudeStep() {
+        // Here we generate programmatically the view that will be added by the system to the step content layout
+        latitude = new EditText(this);
+        latitude.setSingleLine(true);
+        latitude.setHint("Latitude");
+        return latitude;
+    }
+
+    private View createLongitudeStep() {
+        // Here we generate programmatically the view that will be added by the system to the step content layout
+        longitude = new EditText(this);
+        longitude.setSingleLine(true);
+        longitude.setHint("Longitude");
+        return longitude;
+    }
+
+    /*private View createPhoneNumberStep() {
         LayoutInflater inflater = LayoutInflater.from(getBaseContext());
         LinearLayout phoneLayoutContent = (LinearLayout) inflater.inflate(R.layout.phone_step_layout, null, false);
 
         return phoneLayoutContent;
-    }
+    }*/
 
 
     @Override
@@ -252,11 +343,55 @@ public class AddCaseActivity extends AppCompatActivity implements VerticalSteppe
                 // In this case, the instruction above is equivalent to:
                 // verticalStepperForm.setActiveStepAsCompleted();
                 break;
+            case 3:
+                // As soon as the phone number step is open, we mark it as completed in order to show the "Continue"
+                // button (We do it because this field is optional, so the user can skip it without giving any info)
+                verticalStepperForm.setStepAsCompleted(3);
+                // In this case, the instruction above is equivalent to:
+                // verticalStepperForm.setActiveStepAsCompleted();
+                break;
+            case 4:
+                // As soon as the phone number step is open, we mark it as completed in order to show the "Continue"
+                // button (We do it because this field is optional, so the user can skip it without giving any info)
+                verticalStepperForm.setStepAsCompleted(4);
+                // In this case, the instruction above is equivalent to:
+                // verticalStepperForm.setActiveStepAsCompleted();
+                break;
+            case 5:
+                // As soon as the phone number step is open, we mark it as completed in order to show the "Continue"
+                // button (We do it because this field is optional, so the user can skip it without giving any info)
+                verticalStepperForm.setStepAsCompleted(5);
+                // In this case, the instruction above is equivalent to:
+                // verticalStepperForm.setActiveStepAsCompleted();
+                break;
+            case 6:
+                // As soon as the phone number step is open, we mark it as completed in order to show the "Continue"
+                // button (We do it because this field is optional, so the user can skip it without giving any info)
+                verticalStepperForm.setStepAsCompleted(6);
+                // In this case, the instruction above is equivalent to:
+                 //verticalStepperForm.setActiveStepAsCompleted();
+                break;
+            case 7:
+                //checkEmail();
+                verticalStepperForm.setStepAsCompleted(7);
+
+                break;
+            case 8:
+                //checkEmail();
+                verticalStepperForm.setStepAsCompleted(8);
+
+                break;
+            case 9:
+                //checkEmail();
+                verticalStepperForm.setActiveStepAsCompleted();
+
+
+                break;
         }
     }
 
     private void checkName() {
-        if(name.length() >= 3 && name.length() <= 40) {
+        if(title.length() >= 7 && title.length() <= 40) {
             verticalStepperForm.setActiveStepAsCompleted();
         } else {
             // This error message is optional (use null if you don't want to display an error message)
@@ -273,10 +408,19 @@ public class AddCaseActivity extends AppCompatActivity implements VerticalSteppe
 
     @Override
     public void sendData() {
-        /*progressDialog = new ProgressDialog(this);
+       /* progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(true);
         progressDialog.show();
         progressDialog.setMessage(getString(R.string.vertical_form_stepper_form_sending_data_message));
-        executeDataSending();*/
+        //executeDataSending();*/
+// SQLite database handler
+        db = new SQLiteHandler(getApplicationContext());
+
+        // Session manager
+        session = new SessionManager(getApplicationContext());
+        HashMap<String, String> user = db.getUserDetails();
+       // Log.e(TAG, a.toString() );
+        //Log.e(TAG, a.get("username"));
+        addCase(title.getText().toString(),shortDescription.getText().toString(),longDescription.getText().toString(),thumbnail.getText().toString(),user.get("username"),governorate.getText().toString(),city.getText().toString(),place.getText().toString());
     }
 }

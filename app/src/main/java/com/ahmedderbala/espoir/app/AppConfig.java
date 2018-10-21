@@ -20,7 +20,6 @@ public class AppConfig {
     public static String URL_CASES = "cases/";
     public static String URL_LIST_CASES = URL_SERVER + URL_CASES + "listCases.php";
     public static String URL_ADD_CASE = URL_SERVER + URL_CASES + "addCase.php";
-
     public static String URL_CASE_THUMBNAIL = URL_SERVER + URL_CASES + "images/";
 
 
