@@ -2,17 +2,17 @@ package com.ahmedderbala.espoir.Cases;
 
 
 import android.content.Context;
-        import android.support.v7.widget.PopupMenu;
-        import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.PopupMenu;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-        import android.view.MenuInflater;
-        import android.view.MenuItem;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.widget.ImageView;
-        import android.widget.TextView;
-        import android.widget.Toast;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ahmedderbala.espoir.R;
 import com.bumptech.glide.Glide;
@@ -30,7 +30,7 @@ public class CasesAdapter extends RecyclerView.Adapter<CasesAdapter.MyViewHolder
     private List<Case> caseList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView title, shortDescription,author,city;
+        public TextView title, shortDescription, author, city;
         public ImageView thumbnail, overflow;
 
         public MyViewHolder(View view) {
@@ -67,13 +67,9 @@ public class CasesAdapter extends RecyclerView.Adapter<CasesAdapter.MyViewHolder
         holder.city.setText(c.getCity());
         //Picasso.with(mContext).load(URL_CASE_THUMBNAIL+c.getThumbnail()).into(holder.thumbnail);
         Picasso.with(mContext).load(c.getThumbnail()).into(holder.thumbnail);
-        Log.e("PHOTO", c.getThumbnail() );
+        Log.e("PHOTO", c.getThumbnail());
 
-
-
-
-
-       /* // loading album cover using Glide library
+        // loading album cover using Glide library
         Glide.with(mContext).load(c.getThumbnail()).into(holder.thumbnail);
 
         holder.overflow.setOnClickListener(new View.OnClickListener() {
@@ -81,7 +77,7 @@ public class CasesAdapter extends RecyclerView.Adapter<CasesAdapter.MyViewHolder
             public void onClick(View view) {
                 showPopupMenu(holder.overflow);
             }
-        });*/
+        });
     }
 
     /**

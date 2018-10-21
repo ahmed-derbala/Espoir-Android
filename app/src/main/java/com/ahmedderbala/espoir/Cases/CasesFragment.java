@@ -102,7 +102,6 @@ public class CasesFragment extends Fragment {
                     Intent intent = new Intent(getActivity(), AddCaseActivity.class);
                     startActivity(intent);
                     //finish();
-                    addCase("a", "b", "c", "v", "g", "f", "f", "h");
 
                 }
                 else
@@ -207,69 +206,5 @@ public class CasesFragment extends Fragment {
         AppController.getInstance().addToRequestQueue(jsonArrayRequest, "hhh");
     }
 
-    public void addCase(final String title, final String shortDescription, final String longDescription, final String thumbnail, final String author, final String governorate, final String city, final String place) {
-// Tag used to cancel the request
-        String tag_string_req = "req_register";
-
-
-        StringRequest strReq = new StringRequest(Request.Method.POST,
-                AppConfig.URL_ADD_CASE, new Response.Listener<String>() {
-
-
-            @Override
-            public void onResponse(String response) {
-
-                try {
-                    JSONObject jObj = new JSONObject(response);
-                    boolean error = jObj.getBoolean("error");
-                    if (!error) {
-                        Log.d(TAG, "onResponse: ENTERING ERROR");
-                        Toast.makeText(getActivity(), jObj.getString("error_msg"), Toast.LENGTH_LONG).show();
-
-                    } else {
-
-                        // Error occurred in registration. Get the error
-                        // message
-                        String errorMsg = jObj.getString("error_msg");
-                        Toast.makeText(getActivity(),
-                                errorMsg, Toast.LENGTH_LONG).show();
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e(TAG, "Favoris Error: " + error.getMessage());
-                // Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
-                Toast.makeText(getActivity(), "you should log in first", Toast.LENGTH_LONG).show();
-
-            }
-        }) {
-
-            @Override
-            protected Map<String, String> getParams() {
-                // Posting params to register url
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("username", "ahmed");
-                params.put("title", title);
-                params.put("shortDescription", shortDescription);
-                params.put("longDescription", longDescription);
-                params.put("thumbnail", thumbnail);
-                params.put("author", author);
-                params.put("governorate", governorate);
-                params.put("city", city);
-                params.put("place", place);
-                return params;
-            }
-
-        };
-
-        // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
-    }
 
 }

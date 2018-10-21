@@ -9,6 +9,25 @@
     tools:showIn="@layout/activity_main"
     android:padding="1dp"
     android:id="@+id/main_container">
+    <TextView
+        android:id="@+id/information"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_alignParentTop="true"
+        android:textSize="21sp"
+        android:text="aaaa"/>
+
+    <TextView
+        android:id="@+id/disclaimer"
+        android:layout_below="@id/information"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textSize="14sp"
+        android:text="bbbb"
+        android:visibility="gone"/>
 
 
 
