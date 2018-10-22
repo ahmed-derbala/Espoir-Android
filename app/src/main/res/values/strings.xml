@@ -4,9 +4,13 @@
     <string name="Events">Events</string>
     <string name="Contacts">Contacts</string>
     <string name="about">About</string>
+    <string name="hint_firstName">First Name (optional)</string>
+
+    <string name="hint_lastName">Last Name (optional)</string>
+
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
-    <string name="hint_name">Fullname</string>
+    <string name="hint_username">If you dont want to user your real name , provide a username</string>
     <string name="btn_login">LOGIN</string>
     <string name="btn_register">REGISTER</string>
     <string name="btn_link_to_register">Not a contact? Sign up now.</string>
@@ -22,6 +26,8 @@
     <string name="no_data">No Data</string>
     <string name="not_logged_in">You are not logged in</string>
     <string name="login">Login</string>
+    <string name="register">Register</string>
+
     <string name="or">OR</string>
 
     ///new
