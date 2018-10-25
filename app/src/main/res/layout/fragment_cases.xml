@@ -11,6 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="add case"/>
+    <com.yalantis.phoenix.PullToRefreshView
+        android:id="@+id/pull_to_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
@@ -18,5 +22,7 @@
         android:layout_height="wrap_content"
         android:clipToPadding="false"
         android:scrollbars="vertical" />
+    </com.yalantis.phoenix.PullToRefreshView>
+
 
 </FrameLayout>

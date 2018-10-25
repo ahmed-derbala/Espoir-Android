@@ -29,6 +29,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.yalantis.phoenix.PullToRefreshView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -53,6 +54,8 @@ public class CasesFragment extends Fragment {
     private Button addCaseBTN;
     private SessionManager session;
     private SQLiteHandler db;
+    private PullToRefreshView mPullToRefreshView;
+
 
     public CasesFragment() {
         // Required empty public constructor
@@ -67,6 +70,24 @@ public class CasesFragment extends Fragment {
 
 
         listCases();
+
+        //pull to refresh
+
+        mPullToRefreshView = (PullToRefreshView) rootView.findViewById(R.id.pull_to_refresh);
+        mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mPullToRefreshView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mPullToRefreshView.setRefreshing(false);
+                        caseList.clear();
+                        listCases();
+                    }
+                }, 1500);
+            }
+        });
+        //end pull to refresh
 
 
         recyclerView = rootView.findViewById(R.id.recycler_view);
