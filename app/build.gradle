@@ -12,9 +12,9 @@ android {
         applicationId "com.ahmedderbala.espoir"
         minSdkVersion 21
         targetSdkVersion 28
-        versionName '1.0.9 alpha'
+        versionName '1.0.12 alpha'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        versionCode 10
+        versionCode 13
     }
     buildTypes {
         release {
@@ -49,6 +49,4 @@ dependencies {
     implementation 'com.ernestoyaquello.stepperform:vertical-stepper-form:0.9.9'
     //pull to refresh
     implementation 'com.yalantis:phoenix:1.2.3'
-
-
 }

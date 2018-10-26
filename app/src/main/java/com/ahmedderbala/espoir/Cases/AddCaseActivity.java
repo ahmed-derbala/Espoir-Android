@@ -187,6 +187,7 @@ public class AddCaseActivity extends AppCompatActivity implements VerticalSteppe
                 params.put("governorate", governorate);
                 params.put("city", city);
                 params.put("place", place);
+
                 return params;
             }
 

@@ -136,11 +136,9 @@ public class LoginActivity extends Activity {
                         String uid = jObj.getString("uid");
 
                         JSONObject user = jObj.getJSONObject("user");
-                        String name = user.getString("name");
-                        //String lastName = user.getString("lastName");
-                       // String username = user.getString("username");
-                        String lastName = "lastName";
-                        String username = "username";
+                        String name = user.getString("firstName");
+                        String lastName = user.getString("lastName");
+                        String username = user.getString("username");
 
 
                         String email = user.getString("email");

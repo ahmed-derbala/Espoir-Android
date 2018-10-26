@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -51,7 +52,7 @@ public class CasesFragment extends Fragment {
     private List<Case> caseList;
     JsonArrayPostRequest jsonArrayRequest;
     private final String TAG = "CasesFragment";
-    private Button addCaseBTN;
+    private FloatingActionButton addCaseBTN;
     private SessionManager session;
     private SQLiteHandler db;
     private PullToRefreshView mPullToRefreshView;
@@ -66,7 +67,6 @@ public class CasesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_cases, container, false);
-
 
 
         listCases();
@@ -124,9 +124,7 @@ public class CasesFragment extends Fragment {
                     startActivity(intent);
                     //finish();
 
-                }
-                else
-                {
+                } else {
                     Toast.makeText(getActivity(), R.string.not_logged_in, Toast.LENGTH_LONG).show();
 
                 }
