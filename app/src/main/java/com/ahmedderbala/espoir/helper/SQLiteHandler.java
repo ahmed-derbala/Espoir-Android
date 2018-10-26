@@ -1,8 +1,3 @@
-/**
- * Author: Ravi Tamada
- * URL: www.androidhive.info
- * twitter: http://twitter.com/ravitamada
- * */
 package com.ahmedderbala.espoir.helper;
 
 import android.content.ContentValues;

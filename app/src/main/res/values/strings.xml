@@ -9,6 +9,9 @@
     <string name="hint_lastName">Last Name (optional)</string>
 
     <string name="hint_email">Email</string>
+    <string name="hint_type">Type</string>
+    <string name="hint_status">Status</string>
+
     <string name="hint_password">Password</string>
     <string name="hint_username">It can be firstName.lastName or anything else</string>
     <string name="btn_login">LOGIN</string>

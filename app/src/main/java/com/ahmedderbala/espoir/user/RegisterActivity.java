@@ -37,7 +37,7 @@ public class RegisterActivity extends Activity {
     private Button btnRegister;
     private Button btnLinkToLogin;
     private EditText inputFirstName,inputLastName,inputUsername;
-    private EditText inputEmail;
+    private EditText inputEmail,inputType;
     private EditText inputPassword;
     private ProgressDialog pDialog;
     private SessionManager session;
@@ -54,6 +54,9 @@ public class RegisterActivity extends Activity {
         inputUsername = findViewById(R.id.username);
 
         inputEmail = findViewById(R.id.email);
+        inputType = findViewById(R.id.type);
+
+
         inputPassword = findViewById(R.id.password);
         btnRegister = findViewById(R.id.btnRegister);
         btnLinkToLogin = findViewById(R.id.btnLinkToLoginScreen);
@@ -86,11 +89,14 @@ public class RegisterActivity extends Activity {
                 String username = inputUsername.getText().toString().trim();
 
                 String email = inputEmail.getText().toString().trim();
+                String type = inputType.getText().toString().trim();
+
+
                 Log.e(TAG, "email = "+email );
                 String password = inputPassword.getText().toString().trim();
 
                 if (!username.isEmpty() && !email.isEmpty() && !password.isEmpty()) {
-                    registerUser(firstName,lastName,username, email, password);
+                    registerUser(firstName,lastName,username, email,type, password);
                 } else {
                     Toast.makeText(getApplicationContext(),
                             "Please enter your details!", Toast.LENGTH_LONG)
@@ -116,7 +122,7 @@ public class RegisterActivity extends Activity {
      * Function to store user in MySQL database will post params(tag, name,
      * email, password) to register url
      * */
-    private void registerUser(final String firstName,final String lastName,final String username, final String email,
+    private void registerUser(final String firstName,final String lastName,final String username, final String email, final  String type,
                               final String password) {
         // Tag used to cancel the request
         String tag_string_req = "req_register";
@@ -146,6 +152,10 @@ public class RegisterActivity extends Activity {
                         String lastName = user.getString("lastName");
                         String username = user.getString("username");
                         String email = user.getString("email");
+                        String type = user.getString("type");
+
+                        String status = user.getString("status");
+
                         String created_at = user.getString("created_at");
 
                         // Inserting row in users table
@@ -193,6 +203,10 @@ public class RegisterActivity extends Activity {
                 params.put("username", username);
 
                 params.put("email", email);
+                params.put("type", type);
+
+                params.put("status", "inactive");
+
                 params.put("password", password);
 
                 return params;

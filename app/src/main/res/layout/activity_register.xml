@@ -52,6 +52,18 @@
         android:inputType="textEmailAddress" />
 
     <EditText
+        android:id="@+id/type"
+        android:textColor="@color/gray"
+        android:textColorHint="@color/red"
+
+
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/gray"
+        android:hint="@string/hint_type"
+        android:inputType="text" />
+
+    <EditText
         android:id="@+id/email"
         android:textColor="@color/gray"
         android:textColorHint="@color/red"
