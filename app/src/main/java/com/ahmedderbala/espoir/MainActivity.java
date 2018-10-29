@@ -1,4 +1,4 @@
-package com.ahmedderbala.espoir.user;
+package com.ahmedderbala.espoir;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,8 +17,7 @@ import android.widget.TextView;
 import com.ahmedderbala.espoir.Cases.CasesFragment;
 import com.ahmedderbala.espoir.Contacts.ContactsFragment;
 import com.ahmedderbala.espoir.Events.EventsFragment;
-import com.ahmedderbala.espoir.R;
-import com.ahmedderbala.espoir.SettingsActivity;
+import com.ahmedderbala.espoir.user.LoginActivity;
 import com.bumptech.glide.Glide;
 
 public class MainActivity extends AppCompatActivity {

@@ -1,24 +1,19 @@
 package com.ahmedderbala.espoir.Cases;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ahmedderbala.espoir.R;
-import com.ahmedderbala.espoir.app.AppConfig;
-import com.ahmedderbala.espoir.app.AppController;
+import com.ahmedderbala.espoir.connection.AppConfig;
+import com.ahmedderbala.espoir.connection.AppController;
 import com.ahmedderbala.espoir.helper.SQLiteHandler;
 import com.ahmedderbala.espoir.helper.SessionManager;
 import com.android.volley.Request;
@@ -149,6 +144,7 @@ public class AddCaseActivity extends AppCompatActivity implements VerticalSteppe
                     boolean error = jObj.getBoolean("error");
                     if (!error) {
                         Log.d(TAG, "onResponse: ENTERING ERROR");
+
                         Toast.makeText(getApplicationContext(), jObj.getString("error_msg"), Toast.LENGTH_LONG).show();
 
                     } else {
@@ -182,7 +178,14 @@ public class AddCaseActivity extends AppCompatActivity implements VerticalSteppe
                 params.put("title", title);
                 params.put("shortDescription", shortDescription);
                 params.put("longDescription", longDescription);
-                params.put("thumbnail", thumbnail);
+                if (thumbnail.equals(""))
+                {
+                    params.put("thumbnail", "no_photo");
+                }
+                else
+                {
+                    params.put("thumbnail", thumbnail);
+                }
                 params.put("author", author);
                 params.put("governorate", governorate);
                 params.put("city", city);
@@ -272,7 +275,7 @@ public class AddCaseActivity extends AppCompatActivity implements VerticalSteppe
         // Here we generate programmatically the view that will be added by the system to the step content layout
         thumbnail = new EditText(this);
         thumbnail.setSingleLine(true);
-        thumbnail.setHint("Thumbnail");
+        thumbnail.setHint(R.string.paste_thumbnail_URL);
         return thumbnail;
     }
 

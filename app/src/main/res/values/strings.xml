@@ -31,7 +31,9 @@
     <string name="login">Login</string>
     <string name="register">Register</string>
 
-    <string name="or">OR</string>
+    <string name="or">OR</string> Paste a thumbnail URL
+    <string name="paste_thumbnail_URL">Paste a thumbnail URL</string>
+
 
     ///new
     <string name="add_alarm">Add New Alarm</string>

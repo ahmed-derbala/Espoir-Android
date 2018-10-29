@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.ahmedderbala.espoir.MainActivity;
 import com.android.volley.Request.Method;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -27,8 +28,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.ahmedderbala.espoir.R;
-import com.ahmedderbala.espoir.app.AppConfig;
-import com.ahmedderbala.espoir.app.AppController;
+import com.ahmedderbala.espoir.connection.AppConfig;
+import com.ahmedderbala.espoir.connection.AppController;
 import com.ahmedderbala.espoir.helper.SQLiteHandler;
 import com.ahmedderbala.espoir.helper.SessionManager;
 

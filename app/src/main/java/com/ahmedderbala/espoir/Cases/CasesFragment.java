@@ -14,22 +14,16 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.ahmedderbala.espoir.R;
 
-import com.ahmedderbala.espoir.app.AppConfig;
-import com.ahmedderbala.espoir.app.AppController;
+import com.ahmedderbala.espoir.connection.AppController;
 import com.ahmedderbala.espoir.helper.JsonArrayPostRequest;
 import com.ahmedderbala.espoir.helper.SQLiteHandler;
 import com.ahmedderbala.espoir.helper.SessionManager;
-import com.ahmedderbala.espoir.user.LoginActivity;
-import com.ahmedderbala.espoir.user.LogoutActivity;
-import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.yalantis.phoenix.PullToRefreshView;
 
 import org.json.JSONArray;
@@ -39,9 +33,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import static com.ahmedderbala.espoir.app.AppConfig.URL_LIST_CASES;
+import static com.ahmedderbala.espoir.connection.AppConfig.URL_LIST_CASES;
 
 /**
  * A simple {@link Fragment} subclass.

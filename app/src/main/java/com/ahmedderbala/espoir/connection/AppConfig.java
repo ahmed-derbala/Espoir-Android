@@ -1,9 +1,9 @@
-package com.ahmedderbala.espoir.app;
+package com.ahmedderbala.espoir.connection;
 
 public class AppConfig {
     //ip
-    public static String URL_IP = "http://derbalaahmed531992.000webhostapp.com/";
-    //public static String URL_IP = "http://192.168.43.17/";
+    //public static String URL_IP = "http://derbalaahmed531992.000webhostapp.com/";
+    public static String URL_IP = "http://192.168.43.17/";
     //public static String URL_IP = "http://172.16.186.74/"; 192.168.1.6
     //public static String URL_IP = "http://192.168.1.6/";
 

@@ -21,8 +21,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import static com.ahmedderbala.espoir.app.AppConfig.URL_CASE_THUMBNAIL;
-
 
 public class CasesAdapter extends RecyclerView.Adapter<CasesAdapter.MyViewHolder> {
 
@@ -69,15 +67,22 @@ public class CasesAdapter extends RecyclerView.Adapter<CasesAdapter.MyViewHolder
         Picasso.with(mContext).load(c.getThumbnail()).into(holder.thumbnail);
         Log.e("PHOTO", c.getThumbnail());
 
-        // loading album cover using Glide library
-        Glide.with(mContext).load(c.getThumbnail()).into(holder.thumbnail);
+        if (!c.getThumbnail().equals("no_photo"))
+        {
+            // loading album cover using Glide library
+            Glide.with(mContext).load(c.getThumbnail()).into(holder.thumbnail);
 
-        holder.overflow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showPopupMenu(holder.overflow);
-            }
-        });
+            holder.overflow.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    showPopupMenu(holder.overflow);
+                }
+            });
+        }
+        else
+        {
+            holder.thumbnail.setBackgroundResource(R.drawable.no_image_512);
+        }
     }
 
     /**

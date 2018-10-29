@@ -27,8 +27,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.ahmedderbala.espoir.R;
-import com.ahmedderbala.espoir.app.AppConfig;
-import com.ahmedderbala.espoir.app.AppController;
+import com.ahmedderbala.espoir.connection.AppConfig;
+import com.ahmedderbala.espoir.connection.AppController;
 import com.ahmedderbala.espoir.helper.SQLiteHandler;
 import com.ahmedderbala.espoir.helper.SessionManager;
 

@@ -1,4 +1,4 @@
-package com.ahmedderbala.espoir.app;
+package com.ahmedderbala.espoir.connection;
 
 import android.app.Application;
 import android.text.TextUtils;
